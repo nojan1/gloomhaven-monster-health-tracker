@@ -35,10 +35,23 @@ const MainView = () => {
             })
         }
 
+    const onEffectRemoved = (monster) =>
+        (effect) => {
+            dispatch({
+                type: 'remove_effect',
+                payload: {
+                    id: monster.id,
+                    effect
+                }
+            })
+        }
+
     return <div>
         <MainViewContainer>
             <MonsterWidgetsContainer>
-                {Object.values(monsters).map(monster => <MonsterWidget key={monster.id} monster={monster} onDamage={takeDamage(monster)} />)}
+                {Object.values(monsters).map(monster =>
+                    <MonsterWidget key={monster.id} monster={monster} onDamage={takeDamage(monster)} onEffectRemoved={onEffectRemoved(monster)} />
+                )}
             </MonsterWidgetsContainer>
         </MainViewContainer>
     </div>;

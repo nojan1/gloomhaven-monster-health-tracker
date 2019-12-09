@@ -12,7 +12,10 @@ const getMonsterBlock = (id, number, name, elite = false, level = 0) => {
         move: elite ? stats.level[level].elite.move : stats.level[level].normal.move,
         attack: elite ? stats.level[level].elite.attack : stats.level[level].normal.attack,
         range: elite ? stats.level[level].elite.range : stats.level[level].normal.range,
-        attributes: elite ? stats.level[level].elite.attributes : stats.level[level].normal.attributes
+        attributes: elite ? stats.level[level].elite.attributes : stats.level[level].normal.attributes,
+        effects: [
+            'poison'
+        ]
     }
 }
 

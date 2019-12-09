@@ -71,7 +71,7 @@ const HealthDisplay = styled.div`
     }
 `;
 
-const MonsterWidget = ({ monster, onDamage }) =>
+const MonsterWidget = ({ monster, onDamage, onEffectRemoved }) =>
     <MonsterWidgetContainer>
         <MonsterImage>
             <NumberCircle elite={monster.elite}>{monster.number}</NumberCircle>
@@ -107,7 +107,7 @@ const MonsterWidget = ({ monster, onDamage }) =>
 
         <DamageButtons onDamage={onDamage} />
 
-        <Effects />
+        <Effects effects={monster.effects || []} onEffectRemoved={onEffectRemoved}/>
     </MonsterWidgetContainer>
 
 export default MonsterWidget;

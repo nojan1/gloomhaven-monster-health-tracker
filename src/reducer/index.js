@@ -12,6 +12,17 @@ export const mainReducer = (state, action) => {
             } else {
                 return { ...state, monsters: { ...state.monsters, [newMonster.id]: newMonster } };
             }
+        case 'remove_effect':
+            return {
+                    ...state, 
+                        monsters: {
+                            ...state.monsters, 
+                            [action.payload.id]: {
+                                ...state.monsters[action.payload.id], 
+                                effects: state.monsters[action.payload.id].effects.filter(x => x !== action.payload.effect)
+                            }
+                        }
+                    };
         default:
             return state;
     }

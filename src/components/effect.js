@@ -12,28 +12,58 @@ const EffectsContainer = styled.div`
     align-items: center;
 `;
 
-const EffectIcon = styled.div`
+const EffectIconContainer = styled.div`
     width: 32px;
     height: 32px;
     background-image: url('images/icons/${props => props.type}.png');
     background-size: contain;
     justify-self: center;
     margin-right: 2px;
+
+    :hover {
+        cursor: pointer;
+
+        button {
+            transform: scale(1.1);
+        }
+    }
+`;
+
+const RemoveEffectButton = styled.button`
+    border: none;
+    background-color: white;
+    border-radius: 100%;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.6em;
+    padding: 0;
+    float:right;
+    margin-right: -5px;
+    margin-top: -2px;
+
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 const AddEffectButton = styled(TokenButton)`
     margin-right: 10px;
 `;
 
-export const Effects = () =>
+export const Effects = ({onEffectRemoved, effects}) =>
     <EffectsContainer>
         <AddEffectButton>
             +
         </AddEffectButton>
 
-        <EffectIcon type="poison">
-
-        </EffectIcon>
-        <EffectIcon type="immobilize" />
-        <EffectIcon type="wound" />
+        {effects.map(x => 
+            <EffectIcon key={x} type={x} onRemove={() => onEffectRemoved(x)} />     
+        )}
     </EffectsContainer>
+
+const EffectIcon = ({type, onRemove}) => 
+    <EffectIconContainer type={type} onClick={onRemove}>
+        <RemoveEffectButton onClick={onRemove}>X</RemoveEffectButton>
+    </EffectIconContainer>
