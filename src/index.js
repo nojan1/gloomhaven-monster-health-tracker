@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router} from 'react-router-dom'
 import App from './App';
 import { StateProvider } from './state';
 import { getInitialState } from './state/initial';
@@ -28,8 +29,10 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 ReactDOM.render(
-    <StateProvider reducer={mainReducer} initialState={getInitialState()}>
-        <GlobalStyle />
-        <App />
-    </StateProvider>
-    , document.getElementById('root'));
+  <StateProvider reducer={mainReducer} initialState={getInitialState()}>
+    <GlobalStyle />
+    <Router>
+      <App />
+    </Router>
+  </StateProvider>
+  , document.getElementById('root'));

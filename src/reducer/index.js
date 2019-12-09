@@ -1,4 +1,5 @@
 import { save } from '../state/persist';
+import { getMonsterObject } from '../data/monsters';
 
 export const mainReducer = (state, action) => {
     switch (action.type) {
@@ -24,6 +25,22 @@ export const mainReducer = (state, action) => {
                             }
                         }
                     });
+        case 'add_monster':
+            const nextId = Object.values(state.monsters).length;
+
+            return save({
+                ...state,
+                monsters: {
+                    ...state.monsters,
+                    [nextId]: getMonsterObject(
+                        nextId,
+                        action.payload.name,
+                        action.payload.level,
+                        action.payload.number,
+                        action.payload.isElite
+                    )
+                }
+            })
         default:
             return state;
     }

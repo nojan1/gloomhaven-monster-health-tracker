@@ -1,24 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { ViewContainer } from './viewContainer';
 import MonsterWidget from './monsterWidget';
+import { TextButton } from './button';
 
 import { getState } from '../state'
-
-const MainViewContainer = styled.div`
-    width: 100%;
-    height: 100%;
-    padding: 10%;
-    box-sizing: border-box;
-
-    @media(max-width: 700px) {
-        padding: 15%;
-    }
-`;
 
 const MonsterWidgetsContainer = styled.div`
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+`;
+
+const AddButton = styled(TextButton)`
+    font-size: 3.5em;
+    display: block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    text-align:center;
+    position: absolute;
+    z-index: 2;
+    top:10px;
+    left: 10px;
 `;
 
 const MainView = () => {
@@ -47,13 +53,16 @@ const MainView = () => {
         }
 
     return <div>
-        <MainViewContainer>
+        <AddButton to="/add" as={Link}>
+            +
+        </AddButton>
+        <ViewContainer>
             <MonsterWidgetsContainer>
                 {Object.values(monsters).map(monster =>
                     <MonsterWidget key={monster.id} monster={monster} onDamage={takeDamage(monster)} onEffectRemoved={onEffectRemoved(monster)} />
                 )}
             </MonsterWidgetsContainer>
-        </MainViewContainer>
+        </ViewContainer>
     </div>;
 }
 

@@ -14,7 +14,7 @@ export const Attribute = ({attributeText}) => {
     if(attributesWithIcon.indexOf(attribute) != -1){
         return (
             <Stat>
-                <img src={`images/icons/${attribute}.png`} />
+                <img src={`images/icons/${attribute}.png`}  alt=""/>
                 <span>{value}</span>
             </Stat>
         );

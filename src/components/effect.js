@@ -49,7 +49,10 @@ const RemoveEffectButton = styled.button`
 `;
 
 const AddEffectButton = styled(TokenButton)`
+    display: block;
     margin-right: 10px;
+    font-size: 1em;
+    height: 30px;
 `;
 
 export const Effects = ({onEffectRemoved, effects}) =>

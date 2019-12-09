@@ -75,7 +75,7 @@ const MonsterWidget = ({ monster, onDamage, onEffectRemoved }) =>
     <MonsterWidgetContainer>
         <MonsterImage>
             <NumberCircle elite={monster.elite}>{monster.number}</NumberCircle>
-            <img src={`images/monsters/Horz-${monster.name}.png`} />
+            <img src={`images/monsters/Horz-${monster.name}.png`} alt="" />
         </MonsterImage>
 
         <AttributeContainer>
@@ -84,15 +84,15 @@ const MonsterWidget = ({ monster, onDamage, onEffectRemoved }) =>
 
         <StatsContainer>
             <Stat>
-                <img src="images/icons/attack.png" />
+                <img src="images/icons/attack.png" alt=""/>
                 <span>{monster.attack}</span>
             </Stat>
             <Stat>
-                <img src="images/icons/range.png" />
+                <img src="images/icons/range.png" alt="" />
                 <span>{monster.range}</span>
             </Stat>
             <Stat>
-                <img src="images/icons/move.png" />
+                <img src="images/icons/move.png" alt="" />
                 <span>{monster.move}</span>
             </Stat>
         </StatsContainer>
@@ -101,7 +101,7 @@ const MonsterWidget = ({ monster, onDamage, onEffectRemoved }) =>
             <span>{monster.hp} hp</span>
 
             <TokenButton onClick={() => onDamage(-1)}>
-                <img src="images/icons/heal.png" />
+                <img src="images/icons/heal.png" alt="" />
             </TokenButton>
         </HealthDisplay>
 
