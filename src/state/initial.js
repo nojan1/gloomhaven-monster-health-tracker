@@ -1,4 +1,5 @@
 import monsterStats from '../data/monster_stats';
+import { load, save } from './persist';
 
 const getMonsterBlock = (id, number, name, elite = false, level = 0) => {
     const stats = monsterStats.monsters[name];
@@ -20,6 +21,10 @@ const getMonsterBlock = (id, number, name, elite = false, level = 0) => {
 }
 
 export const getInitialState = () => {
+    const savedState = load();
+    if (savedState)
+        return savedState;
+
     return {
         monsters: {
             0: getMonsterBlock(0, 1, 'Cave Bear'),

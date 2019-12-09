@@ -1,3 +1,4 @@
+import { save } from '../state/persist';
 
 export const mainReducer = (state, action) => {
     switch (action.type) {
@@ -8,12 +9,12 @@ export const mainReducer = (state, action) => {
             if (newMonster.hp <= 0) {
                 var monsterClone = { ...state.monsters };
                 delete monsterClone[newMonster.id]
-                return { ...state, monsters: monsterClone };
+                return save({ ...state, monsters: monsterClone });
             } else {
-                return { ...state, monsters: { ...state.monsters, [newMonster.id]: newMonster } };
+                return save({ ...state, monsters: { ...state.monsters, [newMonster.id]: newMonster } });
             }
         case 'remove_effect':
-            return {
+            return save({
                     ...state, 
                         monsters: {
                             ...state.monsters, 
@@ -22,7 +23,7 @@ export const mainReducer = (state, action) => {
                                 effects: state.monsters[action.payload.id].effects.filter(x => x !== action.payload.effect)
                             }
                         }
-                    };
+                    });
         default:
             return state;
     }

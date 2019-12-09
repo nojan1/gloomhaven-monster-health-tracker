@@ -14,7 +14,7 @@ const DamageButton = styled.img`
     height: ${props => props.size};
 
     :hover {
-        transform: scale(1.3);
+        transform: scale(1.1);
     }
 `;
 
