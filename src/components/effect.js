@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 
 import { TokenButton } from './button';
@@ -55,18 +55,60 @@ const AddEffectButton = styled(TokenButton)`
     height: 30px;
 `;
 
-export const Effects = ({onEffectRemoved, effects}) =>
-    <EffectsContainer>
-        <AddEffectButton>
-            +
-        </AddEffectButton>
+const AddEffectDialogBackdrop = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index:9;
+`;
 
-        {effects.map(x => 
-            <EffectIcon key={x} type={x} onRemove={() => onEffectRemoved(x)} />     
-        )}
-    </EffectsContainer>
+const AddEffectDialog = styled.div`
+    z-index: 10;
+    max-width: 500px;
+    height: 50px;
+    background-color: rgba(255,255,255, 0.8);
+    border: 2px solid black;
+    padding: 10px;
+`;
 
-const EffectIcon = ({type, onRemove}) => 
+export const Effects = ({ onEffectRemoved, onEffectAdded, effects }) => {
+    const [addEffectDialogVisible, setAddEffectDialogVisible] = useState(false);
+
+    return (
+        <EffectsContainer>
+            {addEffectDialogVisible &&
+                <AddEffectDialogBackdrop onClick={() => setAddEffectDialogVisible(false)}>
+                    <AddEffectDialog>
+                        <RemoveEffectButton onClick={() => setAddEffectDialogVisible(false)}>x</RemoveEffectButton>
+                        <EffectsContainer>
+                            <EffectIconContainer type="poison" onClick={() => onEffectAdded('poison')}/>
+                            <EffectIconContainer type="stun" onClick={() => onEffectAdded('stun')}/>
+                            <EffectIconContainer type="wound" onClick={() => onEffectAdded('wound')}/>
+                            <EffectIconContainer type="immobilize" onClick={() => onEffectAdded('immobilize')}/>
+                            <EffectIconContainer type="muddle" onClick={() => onEffectAdded('muddle')}/>
+                        </EffectsContainer>
+                    </AddEffectDialog>
+                </AddEffectDialogBackdrop>
+            }
+
+            <AddEffectButton onClick={() => setAddEffectDialogVisible(true)}>
+                +
+            </AddEffectButton>
+
+            {effects.map(x =>
+                <EffectIcon key={x} type={x} onRemove={() => onEffectRemoved(x)} />
+            )}
+        </EffectsContainer>
+    );
+}
+
+const EffectIcon = ({ type, onRemove }) =>
     <EffectIconContainer type={type} onClick={onRemove}>
         <RemoveEffectButton onClick={onRemove}>X</RemoveEffectButton>
     </EffectIconContainer>

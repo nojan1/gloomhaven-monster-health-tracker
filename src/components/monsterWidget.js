@@ -29,7 +29,7 @@ const MonsterWidgetContainer = styled.div`
         flex-basis: 170px;
     }
 
-    @media(max-width: 350px) {
+    @media(max-width: 512px) {
         flex-basis: 100%;
     }
 `;
@@ -38,6 +38,7 @@ const MonsterImage = styled.div`
     padding:0 20px;
     img {
         width: 100%;
+        margin-top:-30px;
     }
 `;
 
@@ -51,8 +52,9 @@ const NumberCircle = styled.div`
     text-align: center;
     vertical-align: middle;
     z-index: 2;
-    position: absolute;
+    position: relative;
     margin-left:-15px;
+    margin-top:-5px;
     border-width: 4px;
     border-style: solid;
     border-color: ${props => props.elite ? '#efb413' : 'white'};
@@ -71,7 +73,7 @@ const HealthDisplay = styled.div`
     }
 `;
 
-const MonsterWidget = ({ monster, onDamage, onEffectRemoved }) =>
+const MonsterWidget = ({ monster, onDamage, onEffectRemoved, onEffectAdded }) =>
     <MonsterWidgetContainer>
         <MonsterImage>
             <NumberCircle elite={monster.elite}>{monster.number}</NumberCircle>
@@ -107,7 +109,7 @@ const MonsterWidget = ({ monster, onDamage, onEffectRemoved }) =>
 
         <DamageButtons onDamage={onDamage} />
 
-        <Effects effects={monster.effects || []} onEffectRemoved={onEffectRemoved}/>
+        <Effects effects={monster.effects || []} onEffectRemoved={onEffectRemoved} onEffectAdded={onEffectAdded}/>
     </MonsterWidgetContainer>
 
 export default MonsterWidget;

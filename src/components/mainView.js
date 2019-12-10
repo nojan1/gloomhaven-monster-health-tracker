@@ -52,6 +52,17 @@ const MainView = () => {
             })
         }
 
+    const onEffectAdded = (monster) =>
+        (effect) => {
+            dispatch({
+                type: 'add_effect',
+                payload: {
+                    id: monster.id,
+                    effect
+                }
+            })
+        }
+ 
     return <div>
         <AddButton to="/add" as={Link}>
             +
@@ -59,7 +70,7 @@ const MainView = () => {
         <ViewContainer>
             <MonsterWidgetsContainer>
                 {Object.values(monsters).map(monster =>
-                    <MonsterWidget key={monster.id} monster={monster} onDamage={takeDamage(monster)} onEffectRemoved={onEffectRemoved(monster)} />
+                    <MonsterWidget key={monster.id} monster={monster} onDamage={takeDamage(monster)} onEffectRemoved={onEffectRemoved(monster)} onEffectAdded={onEffectAdded(monster)}/>
                 )}
             </MonsterWidgetsContainer>
         </ViewContainer>
