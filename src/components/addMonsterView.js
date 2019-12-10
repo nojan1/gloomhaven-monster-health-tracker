@@ -71,7 +71,7 @@ const AddMonsterView = ({history}) => {
 
     const duplicateNumbers = selectedMonster && monsterNumbers && monsterNumbers.length
         ? monsterNumbers.filter(x => Object.values(state.monsters).filter(m => m.name === selectedMonster.name && m.number === x).length > 0)
-        : null;
+        : [];
 
     return (
         <ViewContainer>
@@ -100,7 +100,7 @@ const AddMonsterView = ({history}) => {
 
                     <Checkbox title="Is elite?" checked={isElite} onChange={e => setIsElite(e.target.checked)}/>
 
-                    <AddButton onClick={addMonster} disabled={!monsterLevel || !monsterNumbers || duplicateNumbers}>Add</AddButton>
+                    <AddButton onClick={addMonster} disabled={!monsterLevel || monsterNumbers.length === 0 || duplicateNumbers.length !== 0}>Add</AddButton>
 
                     {duplicateNumbers &&
                         <ul>

@@ -11,7 +11,7 @@ const attributesWithIcon = ['curse', 'retaliate', 'pierce', 'shield', 'immobiliz
 export const Attribute = ({attributeText}) => {
     const [attribute, value] = attributeText.toLowerCase().split(' ');
 
-    if(attributesWithIcon.indexOf(attribute) != -1){
+    if(attributesWithIcon.indexOf(attribute) !== -1){
         return (
             <Stat>
                 <img src={`images/icons/${attribute}.png`}  alt=""/>
