@@ -92,6 +92,8 @@ export const Effects = ({ onEffectRemoved, onEffectAdded, effects }) => {
                             <EffectIconContainer type="wound" onClick={() => onEffectAdded('wound')}/>
                             <EffectIconContainer type="immobilize" onClick={() => onEffectAdded('immobilize')}/>
                             <EffectIconContainer type="muddle" onClick={() => onEffectAdded('muddle')}/>
+                            <EffectIconContainer type="disarm" onClick={() => onEffectAdded('disarm')}/>
+                            <EffectIconContainer type="strengthen" onClick={() => onEffectAdded('strengthen')}/>
                         </EffectsContainer>
                     </AddEffectDialog>
                 </AddEffectDialogBackdrop>

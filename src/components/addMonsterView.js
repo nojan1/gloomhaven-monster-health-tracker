@@ -48,13 +48,13 @@ const AddButton = styled(TextButton)`
 const AddMonsterView = ({history}) => {
     const [selectedMonster, setSelectedMonster] = useState();
     const [monsterLevel, setMonsterLevel] = useState();
-    const [monsterNumbers, setMonsterNumbers] = useState('');
+    const [monsterNumbers, setMonsterNumbers] = useState([]);
     const [isElite, setIsElite] = useState(false);
 
-    const [_, dispatch] = getState();
+    const [state, dispatch] = getState();
 
     const addMonster = () => {
-        monsterNumbers.split(',').map(x => x.trim()).forEach(x => {
+        monsterNumbers.forEach(x => {
             dispatch({
                 type: 'add_monster',
                 payload: {
@@ -68,6 +68,10 @@ const AddMonsterView = ({history}) => {
 
         history.push('/');
     }
+
+    const duplicateNumbers = selectedMonster && monsterNumbers && monsterNumbers.length
+        ? monsterNumbers.filter(x => Object.values(state.monsters).filter(m => m.name === selectedMonster.name && m.number === x).length > 0)
+        : null;
 
     return (
         <ViewContainer>
@@ -91,12 +95,18 @@ const AddMonsterView = ({history}) => {
 
                     <FormGroup>
                         <FormGroupTitle>Monster numbers (separate with comma to add more then one)</FormGroupTitle>
-                        <Input value={monsterNumbers} onChange={e => setMonsterNumbers(e.target.value)}/>
+                        <Input value={monsterNumbers} onChange={e => setMonsterNumbers(e.target.value.split(',').map(x => x.trim()))}/>
                     </FormGroup>
 
                     <Checkbox title="Is elite?" checked={isElite} onChange={e => setIsElite(e.target.checked)}/>
 
-                    <AddButton onClick={addMonster} disabled={!monsterLevel || !monsterNumbers}>Add</AddButton>
+                    <AddButton onClick={addMonster} disabled={!monsterLevel || !monsterNumbers || duplicateNumbers}>Add</AddButton>
+
+                    {duplicateNumbers &&
+                        <ul>
+                            {duplicateNumbers.map((x,i) => <li key={i}>Number {x} is already used for {selectedMonster.name}</li>)}
+                        </ul>
+                    }
                 </>
             }
             
