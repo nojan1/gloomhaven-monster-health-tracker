@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import DamageButtons from './damageButtons';
 import { Stat, StatsContainer } from './stat';
-import { Attribute, AttributeContainer } from './attribute';
+import { Attribute, AttributeContainer, AttributeTexts } from './attribute';
 import { TokenButton } from './button';
 import { Effects } from './effect';
 
@@ -83,6 +83,8 @@ const MonsterWidget = ({ monster, onDamage, onEffectRemoved, onEffectAdded }) =>
         <AttributeContainer>
             {monster.attributes.map((x, i) => <Attribute key={i} attributeText={x} />)}
         </AttributeContainer>
+
+        <AttributeTexts attributes={monster.attributes} />
 
         <StatsContainer>
             <Stat>

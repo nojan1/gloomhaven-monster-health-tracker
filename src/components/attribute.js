@@ -3,8 +3,21 @@ import styled from 'styled-components';
 
 import {StatsContainer, Stat} from './stat';
 
-export const AttributeContainer = styled(StatsContainer)`
+const AttributeTextsList = styled.ul`
+    list-style: none;
+    padding: 0;
+    margin: 0;
+`;
 
+const AttributeText = styled.li`
+    font-family: 'pirata-one';
+    text-align: center;
+    padding: 0;
+`;
+
+export const AttributeContainer = styled(StatsContainer)`
+    margin: 0;
+    padding: 0;
 `;
 
 const attributesWithIcon = ['curse', 'retaliate', 'pierce', 'shield', 'immobilize', 'flying', 'poison', 'wound', 'target', 'muddle', 'stun', 'disarm']
@@ -19,6 +32,20 @@ export const Attribute = ({attributeText}) => {
             </Stat>
         );
     }else{
-        return <></>;
+        return null;
+    }
+}
+
+export const AttributeTexts = ({attributes}) => {
+    const attributeTexts = attributes.filter(x => attributesWithIcon.indexOf(x.toLowerCase().split(' ')[0]) === -1);
+
+    if(attributeTexts.length){
+        return (
+            <AttributeTextsList>
+                {attributeTexts.map((x,i) => <AttributeText key={i}>{x}</AttributeText>)}
+            </AttributeTextsList>
+        );
+    }else{
+        return null;
     }
 }
