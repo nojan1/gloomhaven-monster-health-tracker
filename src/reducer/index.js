@@ -43,7 +43,10 @@ export const mainReducer = (state, action) => {
                     }
                 });
         case 'add_monster':
-            const nextId = Object.values(state.monsters).length;
+            const nextId = Object.keys(state.monsters).length > 0
+                ? Object.keys(state.monsters).reduce((acc, cur) => Math.max(acc, cur)) + 1
+                : 0;
+
             const newMonsters = {
                 ...state.monsters,
                 [nextId]: getMonsterObject(

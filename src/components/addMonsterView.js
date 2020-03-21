@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
@@ -52,6 +52,15 @@ const AddMonsterView = ({history}) => {
     const [isElite, setIsElite] = useState(false);
 
     const [state, dispatch] = getState();
+
+    useEffect(() => {
+        const monsters = Object.values(state.monsters);
+
+        if(monsters.length > 0){
+            const lastMonster = monsters[monsters.length - 1];
+            setMonsterLevel(lastMonster.level);
+        }
+    }, []);
 
     const addMonster = () => {
         monsterNumbers.forEach(x => {
