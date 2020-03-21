@@ -20,11 +20,14 @@ const StepTitle = styled.h1`
 const MonsterSelectionView = styled.div`
     display:flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
 `;
 
 const MonsterSelectionItem = styled.img`
     width:80px;
     border:2px dashed transparent;
+    flex: 0;
 
     :hover {
         cursor:pointer;
