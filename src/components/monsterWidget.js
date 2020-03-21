@@ -73,6 +73,17 @@ const HealthDisplay = styled.div`
     }
 `;
 
+const getHpColor = (hp, maxHp) => {
+    if(hp === maxHp)
+        return 'black';
+
+    const hpPercentage = hp / maxHp;
+    if(hpPercentage <= 0.3)
+        return 'red';
+
+    return 'orange';
+}
+
 const MonsterWidget = ({ monster, onDamage, onEffectRemoved, onEffectAdded }) =>
     <MonsterWidgetContainer>
         <MonsterImage>
@@ -102,9 +113,11 @@ const MonsterWidget = ({ monster, onDamage, onEffectRemoved, onEffectAdded }) =>
         </StatsContainer>
 
         <HealthDisplay>
-            <span>{monster.hp} hp</span>
+            <span style={{color: getHpColor(monster.hp, monster.maxHp)}}>
+                {monster.hp} hp
+            </span>
 
-            <TokenButton onClick={() => onDamage(-1)}>
+            <TokenButton onClick={() => onDamage(-1)} disabled={monster.hp >= monster.maxHp}>
                 <img src="images/icons/heal.png" alt="" />
             </TokenButton>
         </HealthDisplay>

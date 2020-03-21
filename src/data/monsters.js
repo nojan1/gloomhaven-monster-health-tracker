@@ -18,6 +18,7 @@ export const getMonsterObject = (id, name, level, number, elite) => {
         elite,
         level,
         hp: levelInfo.health,
+        maxHp: levelInfo.health,
         move: levelInfo.move,
         attack: levelInfo.attack,
         range: levelInfo.range,
